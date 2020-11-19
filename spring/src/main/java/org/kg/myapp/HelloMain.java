@@ -12,6 +12,7 @@ public class HelloMain {
 		HelloController helloController = con.getBean(HelloController.class);
 		helloController.sayHello("최연식");
 
+		
 	}
 
 }
