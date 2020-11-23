@@ -34,7 +34,7 @@
 		
 		</aop:aspectj-autoproxy>
 		
-		<context:property-placeholder location="classpath:db/jdbc.properties"/>
+		<!-- <context:property-placeholder location="classpath:db/jdbc.properties"/> -->
 		
 		<bean id = "dataSource" class = "org.apache.commons.dbcp2.BasicDataSource">
 			<property name="driverClassName" value="${jdbc.driverClassName}"/>
@@ -48,6 +48,28 @@
 		</bean>
 		
 		
+		<!-- DB 암호화 jasypt-->
+		<bean id="propertyConfigurer"
+		class="org.jasypt.spring31.properties.EncryptablePropertyPlaceholderConfigurer">
+		<constructor-arg ref="configurationEncryptor" />
+		<property name="locations">
+		<list>
+		<value>classpath:/db/jdbc.properties</value>
+		</list>
+		</property>
+		</bean>
+		
+		<bean id = "environmentVariableConfiguration"
+		class = "org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig">
+		<property name="algorithm" value = "PBEWithMD5andDES"/>
+		<property name="passwordEnvName" value= "APP_ENCRYPTTION_PASSWORD"/>
+		</bean>
+
+		<bean id="configurationEncryptor"
+		class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">
+		<property name="config" ref="environmentVariableConfiguration" />
+		<property name="password" value="0810" />
+		</bean>
 		
 		
 </beans>

@@ -52,6 +52,8 @@
 		    <version>${org.springframework-version}</version>
 		</dependency>
 		
+		
+		
 		<!-- Oracle JDBC 연결 -->
 		<dependency>
 			<groupId>com.oracle.ojdbc</groupId>
@@ -59,11 +61,30 @@
 			<version>19.3.0.0</version>
 		</dependency>
 		
+		<!-- JDBC Log -->
+		<dependency>
+		    <groupId>com.googlecode.log4jdbc</groupId>
+		    <artifactId>log4jdbc</artifactId>
+		    <version>1.2</version>
+		</dependency>
+		
 		<!-- Connection Pool -->
 		<dependency>
 		    <groupId>org.apache.commons</groupId>
 		    <artifactId>commons-dbcp2</artifactId>
 		    <version>2.1.1</version>
+		</dependency>
+		
+		<!-- DB암호화  -->
+		<dependency>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt</artifactId>
+			<version>1.9.2</version>
+			</dependency>
+			<dependency>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt-spring31</artifactId>
+			<version>1.9.2</version>
 		</dependency>
 		
 		<!-- Logging -->
