@@ -78,4 +78,10 @@ public class EmpService implements IEmpService {
       
       return empRepository.getAllManagerId();   }
 
+	@Override
+	public List<EmpVO> getSearchList(String name) {
+		name = "%" + name +"%";
+		return empRepository.getSearchList(name);
+}
+
 }

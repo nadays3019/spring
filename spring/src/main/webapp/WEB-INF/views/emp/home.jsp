@@ -16,6 +16,13 @@
 	부서번호 : <input type ="text" name ="deptId">
 			<input type ="submit" value="검색">
 	</form>
-
+	
+	2. <a href="list">사원목록</a><br>
+	
+	3. 사원 검색<br>
+	<form action="search">
+		이름 : <input type="text" name = "name" >
+			<input type="submit" value="검색">
+	</form>
 </body>
 </html>

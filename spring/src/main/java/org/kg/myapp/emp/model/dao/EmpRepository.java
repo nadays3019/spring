@@ -152,4 +152,19 @@ public class EmpRepository implements IEmpRepository {
             return jdbcTemplate.queryForList(sql);
    }
 
+	@Override
+	public List<EmpVO> getSearchList(String name) {
+		
+		String sql ="SELECT * FROM employees WHERE first_name LIKE ? or last_name LIKE ?";
+		return jdbcTemplate.query(sql, empMapper,name,name);
+		
+	
+	}
+   
+	//1. 부서 번호 입력 - 해당 부서 사원들 목록으로 조회
+	
+	//2. 부서별 최고 급여 받는 사람들 목록으로 조회
+	
+   
+
 }

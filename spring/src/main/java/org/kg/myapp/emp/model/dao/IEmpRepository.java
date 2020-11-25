@@ -17,4 +17,5 @@ public interface IEmpRepository {
 	List<Map<String,Object>> getAllDeptId();
 	List<Map<String,Object>> getAllJobId();
 	List<Map<String,Object>> getAllManagerId();
+	List<EmpVO> getSearchList(String name);
 }
