@@ -11,7 +11,7 @@
 	<h2>Emp 메인화면</h2>
 	환영합니다~!
 	
-	1. 사원의 수 
+	1. 사원의 수  <br>
 	<form action="count">
 	부서번호 : <input type ="text" name ="deptId">
 			<input type ="submit" value="검색">
@@ -24,5 +24,15 @@
 		이름 : <input type="text" name = "name" >
 			<input type="submit" value="검색">
 	</form>
+	
+	4. 부서별 사원 목록<br>
+	<form action="deptList">
+	부서번호 : <input type ="text" name ="deptId">
+			<input type ="submit" value="검색">
+	</form>
+	
+	5. <a href = "maxSalary">부서별 최고급여자</a> <br>
+	
+	6. <a href = "insert">사원 정보 입력</a>
 </body>
 </html>

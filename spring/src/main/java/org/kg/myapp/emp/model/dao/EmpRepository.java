@@ -105,11 +105,14 @@ public class EmpRepository implements IEmpRepository {
 
    @Override
    public void insertEmp(EmpVO emp) {
-      String sql = "INSERT INTO employees VALUES (?,?,?,?,?,sysdate,?,?,?,?,?)";
-      jdbcTemplate.update(sql, emp.getEmployeeId(),emp.getFirstName(),
-            emp.getLastName(),emp.getEmail(),
-            emp.getPhoneNumber(),emp.getJobId(),emp.getSalary(),
-            emp.getCommissionPct(),emp.getManagerId(),emp.getDepartmentId());
+   String sql = "insert into employees "
+   + "values(?,?,?,?,?,sysdate,?,?,?,?,?)";
+   jdbcTemplate.update(sql,emp.getEmployeeId(),
+   emp.getFirstName(),emp.getLastName(),emp.getEmail(),
+   emp.getPhoneNumber(),emp.getJobId(),emp.getSalary(),
+   emp.getCommissionPct(),emp.getManagerId(),emp.getDepartmentId()
+   );
+
       
 
    }
@@ -160,10 +163,26 @@ public class EmpRepository implements IEmpRepository {
 		
 	
 	}
-   
+
 	//1. 부서 번호 입력 - 해당 부서 사원들 목록으로 조회
-	
+	@Override
+	public List<EmpVO> getListByDept(int deptId) {
+		String sql ="SELECT * FROM employees WHERE department_id = ?";
+		
+		return jdbcTemplate.query(sql, empMapper, deptId);
+	}
+
 	//2. 부서별 최고 급여 받는 사람들 목록으로 조회
+	@Override
+	public List<EmpVO> getMaxEmployeeByDept() {
+		String sql = "SELECT * FROM employees "
+				+ "WHERE (department_id, salary) in "
+				+ "(SELECT department_id, max(salary) FROM employees group by department_id)";
+		return jdbcTemplate.query(sql, empMapper);
+	}
+
+   
+	
 	
    
 

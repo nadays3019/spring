@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -56,6 +57,34 @@ public class EmpController {
 		public String searchEmployee(String name, Model model) {
 			model.addAttribute("empList",empService.getSearchList(name));
 			return "emp/list";
+		}
+		
+		@GetMapping(value ="/deptList")
+		public String getEmployeeListByDeptId(int deptId,Model model) {
+			model.addAttribute("empList", empService.getListByDept(deptId));
+			return "emp/list";
+		}
+		
+		@GetMapping(value="/maxSalary")
+		public String getMaxEmployee(Model model) {
+			model.addAttribute("empList", empService.getMaxEmployeeByDept());
+			return "emp/list";
+			
+		}
+		
+		@GetMapping(value = "/insert")
+		public String insertEmployee(Model model) {
+			model.addAttribute("jobList", empService.getAllJobId());
+			model.addAttribute("manList", empService.getAllManagerId());
+			model.addAttribute("deptList", empService.getAllDeptId());
+			
+			return "emp/insert";
+		}
+		
+		@PostMapping(value ="/insert")
+		public String insertEmployee(EmpVO emp, Model model) {
+			empService.insertEmp(emp);
+			return "redirect:/emp/list";
 		}
 		
 	}
