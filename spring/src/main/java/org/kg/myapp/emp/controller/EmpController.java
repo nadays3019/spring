@@ -1,13 +1,20 @@
 package org.kg.myapp.emp.controller;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.kg.myapp.emp.model.dao.IEmpService;
 import org.kg.myapp.emp.model.vo.EmpVO;
+import org.kg.myapp.emp.util.EmpValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -74,6 +81,7 @@ public class EmpController {
 		
 		@GetMapping(value = "/insert")
 		public String insertEmployee(Model model) {
+			model.addAttribute("emp", new EmpVO());
 			model.addAttribute("jobList", empService.getAllJobId());
 			model.addAttribute("manList", empService.getAllManagerId());
 			model.addAttribute("deptList", empService.getAllDeptId());
@@ -82,9 +90,24 @@ public class EmpController {
 		}
 		
 		@PostMapping(value ="/insert")
-		public String insertEmployee(EmpVO emp, Model model) {
+		public String insertEmployee(@ModelAttribute("emp") @Valid EmpVO emp, BindingResult result, Model model) {
+			if(result.hasErrors()) {
+				model.addAttribute("jobList", empService.getAllJobId());
+				model.addAttribute("manList", empService.getAllManagerId());
+				model.addAttribute("deptList", empService.getAllDeptId());
+				return "emp/insert";
+			}
 			empService.insertEmp(emp);
 			return "redirect:/emp/list";
+		}
+		
+		
+		@ExceptionHandler(RuntimeException.class)
+		public String runtime(HttpServletRequest request, Exception e, Model model ) {
+			model.addAttribute("url", request.getRequestURI());
+			model.addAttribute("exception", e);
+			return "error/runtime";
+			
 		}
 		
 	}
