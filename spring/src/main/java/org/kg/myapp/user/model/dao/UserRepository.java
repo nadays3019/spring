@@ -20,8 +20,8 @@ public class UserRepository implements IUserRepository {
 		@Override
 		public UserVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 			UserVO user = new UserVO();
-			user.setUserIndex(rs.getInt("user_index"));
-			user.setUserId(rs.getString("user_id"));
+			user.setUserIndex(rs.getInt(1));
+			user.setUserId(rs.getString(2));
 			user.setUserPw(rs.getString(3));
 			user.setUserName(rs.getString(4));
 			user.setFileId(rs.getInt(5));
