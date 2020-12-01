@@ -2,6 +2,8 @@ package org.kg.myapp.file.model.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
 
 import org.kg.myapp.file.model.vo.FileVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +71,46 @@ public class FileRepository implements IFileRepository {
 			return file;
 			}
 			}, fileId);
+	}
+
+	@Override
+	public void deleteFile(int fileId) {
+		String sql = "delete from files where file_id =?";
+		jdbctemplate.update(sql,fileId);
+		
+	}
+
+	@Override
+	public List<FileVO> getFileList(String directoryName) {
+		String sql = "SELECT file_id, directory_name, file_name, "
+				+ "file_size, file_content_type, file_upload_date "
+				+ "from files where directory_name=? "
+				+ "order by file_upload_date desc";
+		
+		return jdbctemplate.query(sql, fileMapper,directoryName);
+	}
+
+	@Override
+	public List<FileVO> getAllFileList() {
+		String sql =  "select file_id, directory_name, file_name,"
+				+ "file_size, file_content_type, file_upload_date "
+				+ "from files "
+				+ "order by file_upload_date desc";
+		return jdbctemplate.query(sql, fileMapper);
+	}
+
+	@Override
+	public void updateDirectory(HashMap<String, Object> map) {
+		String sql ="update files set directory_name=? where file_id=?";
+		jdbctemplate.update(sql, map.get("directoryName"),map.get("fileId"));
+		
+	}
+
+	@Override
+	public void updateFile(FileVO file) {
+		String sql ="update files set directory_name=?,file_name=?,file_size=?,file_content_type=?,file_data=? where file_id=?";
+		jdbctemplate.update(sql,file.getDirectoryName(),file.getFileName(),file.getFileSize(),file.getFileContentType(),file.getFileData(),file.getFileId());
+		
 	}
 
 
