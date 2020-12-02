@@ -21,9 +21,6 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="org.kg.myapp.emp.controller" />
-	<context:component-scan base-package="org.kg.myapp.file.controller" />
-	<context:component-scan base-package="org.kg.myapp.loginmember.controller" />
 	
 		<beans:bean id="multipartResolver"
 			class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -31,6 +28,13 @@
 			<beans:value>50000000</beans:value>
 			</beans:property>
 		</beans:bean>
+	
+	<context:component-scan base-package="org.kg.myapp.emp.controller" />
+	<context:component-scan base-package="org.kg.myapp.file.controller" />
+	<context:component-scan base-package="org.kg.myapp.user.controller" />
+	<context:component-scan base-package="org.kg.myapp.login.controller" />
+	<view-controller path="/user/insert" view-name="/user/insert"/>
+	<view-controller path="/login" view-name="login"/>
 	
 	
 	

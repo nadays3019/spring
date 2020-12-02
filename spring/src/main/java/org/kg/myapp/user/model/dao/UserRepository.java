@@ -22,7 +22,6 @@ public class UserRepository implements IUserRepository {
 			UserVO user = new UserVO();
 			user.setUserIndex(rs.getInt(1));
 			user.setUserId(rs.getString(2));
-			user.setUserPw(rs.getString(3));
 			user.setUserName(rs.getString(4));
 			user.setFileId(rs.getInt(5));
 			return user;
@@ -47,6 +46,12 @@ public class UserRepository implements IUserRepository {
 	public UserVO getUserByIndex(int userIndex) {
 		String sql ="select * from login_member where user_index=?";
 		return jdbcTemplate.queryForObject(sql, userMapper,userIndex);
+	}
+
+	@Override
+	public String getPasswordd(String userId) {
+		String sql = "select user_password from login_member where user_id=?";
+		return jdbcTemplate.queryForObject(sql, String.class,userId);
 	}
 
 }

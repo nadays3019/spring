@@ -13,6 +13,7 @@ public interface IFileService {
 	List<FileVO>getAllFileList();
 	public void updateDirectory(int[] fileIds, String directoryName);
 	void updateFile(FileVO file);
+	int getMaxFileId();
 	
 	
 }

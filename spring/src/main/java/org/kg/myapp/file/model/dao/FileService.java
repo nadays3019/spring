@@ -61,4 +61,11 @@ public class FileService implements IFileService {
 		
 	}
 
+	@Override
+	public int getMaxFileId() {
+		
+		return fileRepository.getMaxFileId();
+	}
+
+
 }
