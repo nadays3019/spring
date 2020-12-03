@@ -34,7 +34,7 @@
 	5. <a href = "maxSalary">부서별 최고급여자</a> <br>
 	
 	6. <a href = "insert">사원 정보 입력</a><br>
-	7. <a href = "">마이페이지</a><br>
+	7. <a href = "/myapp/user">마이페이지</a><br>
 	 
 	
 	<form action="/myapp/logout" method ="post">

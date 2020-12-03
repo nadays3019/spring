@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.kg.myapp.emp.model.vo.EmpVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class EmpService implements IEmpService {
 
    @Autowired
+   @Qualifier("IEmpRepository")
    IEmpRepository empRepository;
+   
    
    
    @Override

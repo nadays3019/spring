@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.kg.myapp.file.model.dao.IFileRepository">
+<resultMap id="empMap" type="org.kg.myapp.file.model.vo.FileVO">
+<result property="fileId" column="file_id" />
+<result property="directoryName" column="directory_name" />
+<result property="fileName" column="file_name" />
+<result property="fileSize" column="file_size" />
+<result property="fileContentType" column="file_content_type" />
+<result property="fileUploadDate" column="file_upload_date" />
+<result property="fileData" column="file_data" />
+</resultMap>
+
+<select id="getMaxFileId" resultMap="">
+select nvl(max(file_id),0) from files
+</select>
+
+<select id="uploadFile" parameterType="org.kg.myapp.file.model.vo.FileVO">
+insert into files (file_id, directory_name, file_name, file_size,file_content_type,file_upload_date, file_data) values(?,?,?,?,?,sysdate,?)
+</select>
+
+<select id="getFile" parameterType="int" >
+select file_id, directory_name, file_name, file_size, "
+				+ "file_content_type, file_upload_date, file_data from files "
+				+ "where file_id=#{fileId}
+</select>
+
+<select id="deleteFile" parameterType="int">
+delete from files where file_id =#{fileId}
+</select>
+</mapper>
+
+
+
+
+
